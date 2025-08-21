@@ -11,7 +11,7 @@ This repository provides a PowerShell script that applies **CIS (Center for Inte
 
 - **Repository name:** `vmware-cis-vm`
 - **Script:** `apply-cis-vm-hardening.ps1`
-- **Author:** [uldyssian-sh](https://github.com/uldyssian-sh)
+- **Author:** `Paladin alias LT`
 
 ---
 
