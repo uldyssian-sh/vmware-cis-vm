@@ -54,3 +54,25 @@ All settings are applied via `ExtensionData.ReconfigVM()`, ensuring **full compa
 ```powershell
 git clone https://github.com/uldyssian-sh/vmware-cis-vm.git
 cd vmware-cis-vm
+
+Run the script:
+.\apply-cis-vm-hardening.ps1 -vCenter "vcsa.lab.local" -VMName "Test-VM01"
+
+Script actions:
+* Connects to the specified vCenter
+* Loads the specified VM
+* Applies all CIS hardening parameters
+* Outputs each applied setting
+* Confirms completion with a success message
+
+---
+
+Example Output
+Connecting to vCenter: vcsa.lab.local ...
+Loading VM: Test-VM01 ...
+Applying hardening parameters...
+Applying 'EnableUUID' = 'TRUE'
+Applying 'isolation.bios.bbs.disable' = 'TRUE'
+Applying 'RemoteDisplay.maxConnections' = '1'
+...
+✅ Hardening applied successfully to VM 'Test-VM01'.
