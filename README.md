@@ -15,6 +15,13 @@ This repository provides a PowerShell script that applies **CIS (Center for Inte
 
 ---
 
+## Disclaimer
+
+This script is provided **"as is"**, without any warranty of any kind. Use it at your own risk. You are solely responsible for reviewing, testing, and implementing it in your own environment.
+
+---
+
+
 ## Overview
 
 The `apply-cis-vm-hardening.ps1` script applies multiple advanced VM settings recommended by CIS, including:
