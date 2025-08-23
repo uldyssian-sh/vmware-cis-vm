@@ -12,6 +12,7 @@ This repository provides a PowerShell script that applies **CIS (Center for Inte
 - **Repository name:** `vmware-cis-vm`
 - **Script:** `apply-cis-vm-hardening.ps1`
 - **Author:** `LT`
+- **Version:** `1.0`
 
 ---
 
