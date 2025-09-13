@@ -9,6 +9,8 @@
 
 A comprehensive PowerShell tool for applying **CIS (Center for Internet Security) hardening configurations** to VMware vSphere Virtual Machines. This tool implements security best practices to enhance VM security posture with a single command.
 
+**Author**: LT - [GitHub Profile](https://github.com/uldyssian-sh)
+
 ## 🚀 Features
 
 - **One-Click Hardening**: Apply all CIS VM security settings instantly

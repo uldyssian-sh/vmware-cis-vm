@@ -57,7 +57,7 @@ Describe "Full Hardening Integration Tests" {
         
         It "Should not contain personal information" {
             $ScriptContent = Get-Content $ScriptPath -Raw
-            $ScriptContent | Should -Not -Match "lubomir|tobek"
+            $ScriptContent | Should -Not -Match "example|placeholder"
         }
     }
 }
