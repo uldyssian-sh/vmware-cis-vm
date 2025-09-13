@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  vmware-cis-hardening:
+    build: .
+    image: vmware-cis-vm:latest
+    environment:
+      - POWERSHELL_TELEMETRY_OPTOUT=1
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config
+    command: ["-vCenter", "${VCENTER_SERVER}", "-VMName", "${VM_NAME}"]

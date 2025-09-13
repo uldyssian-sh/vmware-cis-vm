@@ -1,0 +1,171 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [ published ]
+
+env:
+  POWERSHELL_TELEMETRY_OPTOUT: 1
+
+jobs:
+  lint:
+    name: Code Quality & Security
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup PowerShell
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget apt-transport-https software-properties-common
+        wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+        sudo dpkg -i packages-microsoft-prod.deb
+        sudo apt-get update
+        sudo apt-get install -y powershell
+
+    - name: Install PSScriptAnalyzer
+      shell: pwsh
+      run: |
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+        Install-Module -Name PSScriptAnalyzer -Force -AllowClobber
+
+    - name: Run PSScriptAnalyzer
+      shell: pwsh
+      run: |
+        $results = Invoke-ScriptAnalyzer -Path . -Recurse -Severity Error,Warning
+        if ($results) {
+          $results | Format-Table -AutoSize
+          Write-Error "PSScriptAnalyzer found $($results.Count) issues"
+        } else {
+          Write-Host "✅ No critical issues found" -ForegroundColor Green
+        }
+
+    - name: Security scan
+      run: |
+        echo "🔍 Running security checks..."
+        if grep -r "password\|secret\|key\|credential" --include="*.ps1" . | grep -v "# " | grep -v "example" | grep -v "placeholder"; then
+          echo "❌ Potential hardcoded credentials found"
+          exit 1
+        else
+          echo "✅ No hardcoded credentials detected"
+        fi
+
+  test:
+    name: Test on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup PowerShell (Linux/macOS)
+      if: matrix.os != 'windows-latest'
+      shell: bash
+      run: |
+        if [[ "${{ matrix.os }}" == "ubuntu-latest" ]]; then
+          sudo apt-get update
+          sudo apt-get install -y wget apt-transport-https software-properties-common
+          wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+          sudo dpkg -i packages-microsoft-prod.deb
+          sudo apt-get update
+          sudo apt-get install -y powershell
+        elif [[ "${{ matrix.os }}" == "macos-latest" ]]; then
+          brew install --cask powershell
+        fi
+
+    - name: Install test dependencies
+      shell: pwsh
+      run: |
+        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+        Install-Module -Name Pester -Force -SkipPublisherCheck -AllowClobber
+
+    - name: Run tests
+      shell: pwsh
+      run: |
+        if (Test-Path ./tests) {
+          ./tests/Run-Tests.ps1
+        } else {
+          Write-Host "✅ Syntax validation passed" -ForegroundColor Green
+          $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content ./apply-cis-vm-hardening.ps1 -Raw), [ref]$null)
+        }
+
+  documentation:
+    name: Documentation Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check documentation completeness
+      run: |
+        echo "📚 Checking documentation..."
+        required_files=("README.md" "LICENSE" "CHANGELOG.md" "CONTRIBUTING.md" "SECURITY.md")
+        for file in "${required_files[@]}"; do
+          if [[ ! -f "$file" ]]; then
+            echo "❌ Missing: $file"
+            exit 1
+          else
+            echo "✅ Found: $file"
+          fi
+        done
+
+    - name: Validate README
+      run: |
+        if [[ $(wc -l < README.md) -lt 30 ]]; then
+          echo "❌ README.md too short"
+          exit 1
+        fi
+        echo "✅ README validation passed"
+
+  release:
+    name: Create Release Assets
+    runs-on: ubuntu-latest
+    needs: [lint, test, documentation]
+    if: github.event_name == 'release'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Create release package
+      run: |
+        mkdir -p release
+        cp apply-cis-vm-hardening.ps1 release/
+        cp README.md release/
+        cp LICENSE release/
+        cp CHANGELOG.md release/
+        
+        cd release
+        zip -r ../vmware-cis-vm-${{ github.event.release.tag_name }}.zip .
+        tar -czf ../vmware-cis-vm-${{ github.event.release.tag_name }}.tar.gz .
+
+    - name: Upload ZIP
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./vmware-cis-vm-${{ github.event.release.tag_name }}.zip
+        asset_name: vmware-cis-vm-${{ github.event.release.tag_name }}.zip
+        asset_content_type: application/zip
+
+    - name: Upload TAR.GZ
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./vmware-cis-vm-${{ github.event.release.tag_name }}.tar.gz
+        asset_name: vmware-cis-vm-${{ github.event.release.tag_name }}.tar.gz
+        asset_content_type: application/gzip

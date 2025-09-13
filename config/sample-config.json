@@ -1,0 +1,23 @@
+{
+  "VMs": [
+    {
+      "Name": "WebServer01",
+      "vCenter": "vcenter1.example.com",
+      "Environment": "Production"
+    },
+    {
+      "Name": "WebServer02", 
+      "vCenter": "vcenter1.example.com",
+      "Environment": "Production"
+    },
+    {
+      "Name": "DevVM01",
+      "vCenter": "vcenter2.example.com", 
+      "Environment": "Development"
+    }
+  ],
+  "Settings": {
+    "Backup": true,
+    "LogPath": "C:\\Logs\\hardening.log"
+  }
+}

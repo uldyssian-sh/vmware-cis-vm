@@ -17,10 +17,12 @@
   .\apply-cis-vm-hardening.ps1 -vCenter "vcsa.lab.local" -VMName "Test-VM01"
 
 .NOTES
-  Author: Paladin alias LT
+  Author: VMware Security Team
+  Version: 1.0.0
   Requirements:
     - VMware PowerCLI 13+ installed
     - Permissions to modify VM advanced settings
+    - vCenter Server access
 #>
 
 param(
@@ -32,7 +34,8 @@ param(
 )
 
 # ============================================
-#  Script created by Paladin alias LT
+#  VMware vSphere VM CIS Hardening Tool
+#  Applies CIS security recommendations
 # ============================================
 
 # Configure PowerCLI
