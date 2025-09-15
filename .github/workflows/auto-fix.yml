@@ -24,7 +24,7 @@ jobs:
           # Fix Terraform
           terraform fmt -recursive . || true
       - name: Create PR if changes
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'Auto-fix: Code quality improvements'
