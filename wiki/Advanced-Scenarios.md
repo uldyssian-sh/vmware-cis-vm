@@ -7,16 +7,16 @@
 # Post-provisioning hardening
 function Invoke-PostProvisionHardening {
     param($VMName, $vCenter, $RequestId)
-    
+
     # Wait for VM readiness
     do {
         Start-Sleep 30
         $VM = Get-VM -Name $VMName -ErrorAction SilentlyContinue
     } while (-not $VM -or $VM.PowerState -ne "PoweredOn")
-    
+
     # Apply hardening
     ./apply-cis-vm-hardening.ps1 -vCenter $vCenter -VMName $VMName -Backup
-    
+
     # Update custom properties
     Set-Annotation -Entity $VM -Name "CIS.Hardened" -Value "True"
 }
@@ -39,16 +39,16 @@ function Invoke-PostProvisionHardening {
 ```powershell
 function New-ComplianceReport {
     param($vCenterServers, $OutputPath)
-    
+
     $Results = @()
     foreach ($vCenter in $vCenterServers) {
         Connect-VIServer $vCenter
         $VMs = Get-VM
-        
+
         foreach ($VM in $VMs) {
             $Settings = $VM | Get-AdvancedSetting
             $Score = Test-CISCompliance -Settings $Settings
-            
+
             $Results += [PSCustomObject]@{
                 vCenter = $vCenter
                 VMName = $VM.Name
@@ -57,7 +57,7 @@ function New-ComplianceReport {
             }
         }
     }
-    
+
     $Results | Export-Csv "$OutputPath\compliance-$(Get-Date -Format 'yyyyMMdd').csv"
     return $Results
 }
@@ -91,7 +91,7 @@ $TenantConfig = @{
 foreach ($Tenant in $TenantConfig.GetEnumerator()) {
     $Config = $Tenant.Value
     $VMs = Get-VM -Server $Config.vCenter
-    
+
     foreach ($VM in $VMs) {
         if ($Config.BackupRequired) {
             ./apply-cis-vm-hardening.ps1 -vCenter $Config.vCenter -VMName $VM.Name -Backup
@@ -108,16 +108,16 @@ foreach ($Tenant in $TenantConfig.GetEnumerator()) {
 ```powershell
 function Backup-VMConfiguration {
     param($VMName, $vCenter, $BackupPath)
-    
+
     $VM = Get-VM -Name $VMName -Server $vCenter
     $Settings = $VM | Get-AdvancedSetting
-    
+
     $Backup = @{
         VMName = $VMName
         Timestamp = Get-Date
         Settings = $Settings | ForEach-Object { @{ Name = $_.Name; Value = $_.Value } }
     }
-    
+
     $Backup | ConvertTo-Json -Depth 3 | Out-File "$BackupPath\$VMName-$(Get-Date -Format 'yyyyMMdd-HHmmss').json"
 }
 ```
@@ -126,10 +126,10 @@ function Backup-VMConfiguration {
 ```powershell
 function Restore-VMConfiguration {
     param($BackupFile, $vCenter)
-    
+
     $Backup = Get-Content $BackupFile | ConvertFrom-Json
     $VM = Get-VM -Name $Backup.VMName -Server $vCenter
-    
+
     foreach ($Setting in $Backup.Settings) {
         $VM | New-AdvancedSetting -Name $Setting.Name -Value $Setting.Value -Force
     }
@@ -154,14 +154,14 @@ $BatchSize = 10
 
 for ($i = 0; $i -lt $AllVMs.Count; $i += $BatchSize) {
     $Batch = $AllVMs[$i..($i + $BatchSize - 1)]
-    
+
     foreach ($VM in $Batch) {
         Start-Job -ScriptBlock {
             param($VMName, $vCenter)
             ./apply-cis-vm-hardening.ps1 -vCenter $vCenter -VMName $VMName
         } -ArgumentList $VM.Name, $vCenter
     }
-    
+
     # Wait for batch completion
     Get-Job | Wait-Job | Remove-Job
 }

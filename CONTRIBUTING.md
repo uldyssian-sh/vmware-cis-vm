@@ -200,7 +200,7 @@ function Set-Example {
         [Parameter(Mandatory)]
         [string]$ParameterName
     )
-    
+
     # Implementation
 }
 ```
@@ -239,10 +239,10 @@ Describe "VM Hardening Parameters" {
         It "Should set copy operations to disabled" {
             # Arrange
             $mockVM = New-MockVM -Name "TestVM"
-            
+
             # Act
             $result = Set-VMIsolationSettings -VM $mockVM
-            
+
             # Assert
             $result.CopyDisabled | Should -Be $true
         }

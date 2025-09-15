@@ -285,38 +285,38 @@ try {
             EndTime = $null
             ErrorMessage = ""
         }
-        
+
         try {
             Write-Host "Starting hardening for $($VM.Name)..." -ForegroundColor Cyan
-            
+
             # Pre-hardening validation
             $PreCheck = ./scripts/validate-hardening.ps1 -vCenter $VM.vCenter -VMName $VM.Name
             Write-Host "Pre-hardening compliance: $($PreCheck.ComplianceScore)%" -ForegroundColor Yellow
-            
+
             # Apply hardening
             ./apply-cis-vm-hardening.ps1 -vCenter $VM.vCenter -VMName $VM.Name -Backup -LogPath $LogPath
-            
+
             # Post-hardening validation
             Start-Sleep -Seconds 10
             $PostCheck = ./scripts/validate-hardening.ps1 -vCenter $VM.vCenter -VMName $VM.Name
             Write-Host "Post-hardening compliance: $($PostCheck.ComplianceScore)%" -ForegroundColor Green
-            
+
             $Result.Status = "Success"
             $Result.EndTime = Get-Date
-            
+
             Write-Host "✅ Successfully hardened $($VM.Name)" -ForegroundColor Green
         }
         catch {
             $Result.Status = "Failed"
             $Result.ErrorMessage = $_.Exception.Message
             $Result.EndTime = Get-Date
-            
+
             Write-Error "❌ Failed to harden $($VM.Name): $($_.Exception.Message)"
         }
-        
+
         $Results += New-Object PSObject -Property $Result
     }
-    
+
     # Generate summary report
     $Summary = @{
         TotalVMs = $Results.Count
@@ -324,16 +324,16 @@ try {
         Failed = ($Results | Where-Object { $_.Status -eq "Failed" }).Count
         ExecutionTime = (Get-Date) - $Results[0].StartTime
     }
-    
+
     Write-Host "`n=== SUMMARY ===" -ForegroundColor Magenta
     Write-Host "Total VMs: $($Summary.TotalVMs)" -ForegroundColor White
     Write-Host "Successful: $($Summary.Successful)" -ForegroundColor Green
     Write-Host "Failed: $($Summary.Failed)" -ForegroundColor Red
     Write-Host "Execution Time: $($Summary.ExecutionTime)" -ForegroundColor White
-    
+
     # Export detailed results
     $Results | Export-Csv -Path "C:\Reports\Hardening-Results-$(Get-Date -Format 'yyyyMMdd-HHmmss').csv" -NoTypeInformation
-    
+
     if ($Summary.Failed -eq 0) {
         Write-Host "`n🎉 All VMs hardened successfully!" -ForegroundColor Green
         exit 0
