@@ -12,7 +12,7 @@ Professional vmware cis vm solution with enterprise-grade automation and securit
 ## 📊 Repository Stats
 
 - **Files:**       49
-- **Technologies:** PowerShell YAML Docker
+- **Technologies:** PowerShell YAML
 - **Type:** Infrastructure Automation
 - **Status:** Production Ready
 
@@ -33,21 +33,19 @@ Professional vmware cis vm solution with enterprise-grade automation and securit
 # Clone repository
 git clone https://github.com/uldyssian-sh/vmware-cis-vm.git
 cd vmware-cis-vm
-
-# Setup environment
-chmod +x setup.sh
-./setup.sh
 ```
 
-
-## ⚡ PowerShell Scripts
+## ⚡ PowerShell Usage
 
 ```powershell
 # Set execution policy
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-# Run main script
-.\main.ps1
+# Install VMware PowerCLI
+Install-Module VMware.PowerCLI -Force
+
+# Run CIS hardening script
+.\apply-cis-vm-hardening.ps1 -vCenter "your-vcenter" -VMName "your-vm"
 ```
 
 
