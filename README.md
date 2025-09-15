@@ -7,7 +7,8 @@
 [![GitHub issues](https://img.shields.io/github/issues/uldyssian-sh/vmware-cis-vm)](https://github.com/uldyssian-sh/vmware-cis-vm/issues)
 [![GitHub stars](https://img.shields.io/github/stars/uldyssian-sh/vmware-cis-vm)](https://github.com/uldyssian-sh/vmware-cis-vm/stargazers)
 
-A comprehensive PowerShell tool for applying **CIS (Center for Internet Security) hardening configurations** to VMware vSphere Virtual Machines. This tool implements security best practices to enhance VM security posture with a single command.
+A comprehensive PowerShell tool for applying **CIS (Center for Internet Security) hardening configurations** to VMware vSphere Virtual Machines.
+This tool implements security best practices to enhance VM security posture with a single command.
 
 ## 🏗️ Architecture
 
@@ -311,4 +312,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**⚠️ Disclaimer**: This tool is provided "as is" without warranty. Always test in non-production environments first. Users are responsible for reviewing and validating all configurations in their specific environments.
+**⚠️ Disclaimer**: This tool is provided "as is" without warranty.
+Always test in non-production environments first.
+Users are responsible for reviewing and validating all configurations in their specific environments.
