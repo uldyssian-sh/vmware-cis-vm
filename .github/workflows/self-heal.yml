@@ -34,7 +34,7 @@ SECURITY_EOF
           echo "✅ Created missing SECURITY.md"
         fi
         
-        if ! grep -q "^# " README.md; then
+        if [ -f "README.md" ] && ! grep -q "^# " README.md; then
           sed -i '1i# Repository Title' README.md
           echo "✅ Fixed README title"
         fi
@@ -62,6 +62,8 @@ SECURITY_EOF
     needs: auto-fix
     steps:
     - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.ref }}
     
     - name: Daily health check
       run: |

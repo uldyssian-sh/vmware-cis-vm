@@ -16,7 +16,7 @@ jobs:
         
         # Check for sensitive patterns
         echo "Checking for sensitive data..."
-        if find . -type f -name "*.md" -o -name "*.txt" -o -name "*.yml" | xargs grep -l "ghp_\|password.*[^REDACTED]\|secret.*[^REDACTED]\|token.*[^REDACTED]" 2>/dev/null; then
+        if find . -type f -name "*.md" -o -name "*.txt" -o -name "*.yml" | xargs grep -l "ghp_\|password\|secret\|token" 2>/dev/null | xargs grep -L "REDACTED" 2>/dev/null; then
           echo "⚠️ Potential sensitive data found"
         else
           echo "✅ No sensitive data detected"

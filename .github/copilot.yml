@@ -1,23 +1,9 @@
-# GitHub Copilot Configuration
-# Optimizes AI assistance for this repository
-
-suggestions:
-  enabled: true
-  
-code_completion:
-  enabled: true
-  languages:
-    - python
-    - javascript
-    - bash
-    - yaml
-    - terraform
-    - powershell
-
-documentation:
-  auto_generate: true
-  style: "comprehensive"
-  
-best_practices:
-  enforce: true
-  security_focused: true
+# GitHub Copilot Configuration - REMOVED
+# 
+# Note: GitHub Copilot doesn't use .github/copilot.yml files
+# Copilot settings are managed through:
+# - IDE extensions (VS Code, JetBrains)
+# - GitHub account settings
+# - Organization policies
+#
+# This file has been disabled to prevent confusion
