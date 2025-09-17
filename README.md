@@ -1,75 +1,64 @@
-# VMware Infrastructure Automation
+# VMware CIS Virtual Machine Hardening
 
-[![CI](https://github.com/uldyssian-sh/vmware-cis-vm/workflows/CI/badge.svg)](https://github.com/uldyssian-sh/vmware-cis-vm/actions)
-[![Security](https://github.com/uldyssian-sh/vmware-cis-vm/workflows/Security/badge.svg)](https://github.com/uldyssian-sh/vmware-cis-vm/security)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<div align="center">
+  <img src="https://www.cisecurity.org/wp-content/uploads/2020/12/CIS-Logo.png" alt="CIS Benchmarks" width="300"/>
+  
+  [![CIS Benchmark](https://img.shields.io/badge/CIS-Benchmark-blue.svg)](https://www.cisecurity.org/cis-benchmarks/)
+  [![VMware](https://img.shields.io/badge/VMware-vSphere-00A1C9.svg)](https://www.vmware.com/products/vsphere.html)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+</div>
 
-## Overview
+## 🛡️ Overview
 
-Professional VMware infrastructure automation and compliance tools for enterprise environments.
+Automated CIS (Center for Internet Security) benchmark compliance tool for VMware virtual machines. Hardens VM configurations according to industry security standards.
 
-## Features
+## 🎯 Features
 
-- ✅ **Automated Compliance**: STIG/CIS compliance checks
-- 🔒 **Security Hardening**: Enterprise security standards  
-- 📊 **Health Monitoring**: Real-time infrastructure monitoring
-- 🚀 **CI/CD Integration**: Automated deployment pipelines
-- 📚 **Documentation**: Comprehensive guides and examples
+- **CIS Benchmark Compliance**: Automated security hardening
+- **Multi-OS Support**: Windows and Linux virtual machines
+- **Compliance Reporting**: Detailed security assessment reports
+- **Remediation Scripts**: Automated fix deployment
+- **Audit Logging**: Complete audit trail of changes
 
-## Quick Start
+## 🚀 Quick Start
 
 ```bash
-# Clone repository
-git clone https://github.com/uldyssian-sh/vmware-cis-vm.git
-cd vmware-cis-vm
-
 # Install dependencies
 pip install -r requirements.txt
 
-# Run compliance check
-python main.py --check-compliance
+# Configure vCenter connection
+export VCENTER_HOST="vcenter.example.com"
+export VCENTER_USER="administrator@vsphere.local"
+export VCENTER_PASS="password"
+
+# Run CIS compliance check
+python cis_vm_audit.py --vm-name "production-vm-01" --report-format html
+
+# Apply hardening
+python cis_vm_harden.py --vm-name "production-vm-01" --apply-fixes
 ```
 
-## Architecture
+## 📊 Compliance Dashboard
 
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   vCenter       │────│   ESXi Hosts    │────│   Virtual VMs   │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         └───────────────────────┼───────────────────────┘
-                                 │
-                    ┌─────────────────┐
-                    │   Monitoring    │
-                    └─────────────────┘
-```
+![CIS Compliance](https://via.placeholder.com/800x400/4A90E2/FFFFFF?text=CIS+VM+Compliance+Dashboard)
 
-## Documentation
+## 🔧 Supported Controls
+
+| Category | Controls | Windows | Linux |
+|----------|----------|---------|-------|
+| Account Policies | 15 | ✅ | ✅ |
+| Local Policies | 25 | ✅ | ✅ |
+| Event Log | 12 | ✅ | ✅ |
+| System Services | 18 | ✅ | ✅ |
+| Registry | 30 | ✅ | N/A |
+| File Permissions | 20 | ✅ | ✅ |
+
+## 📚 Documentation
 
 - [Installation Guide](https://github.com/uldyssian-sh/vmware-cis-vm/wiki/Installation)
-- [Configuration](https://github.com/uldyssian-sh/vmware-cis-vm/wiki/Configuration)
-- [API Reference](https://github.com/uldyssian-sh/vmware-cis-vm/wiki/API)
-- [Troubleshooting](https://github.com/uldyssian-sh/vmware-cis-vm/wiki/Troubleshooting)
+- [CIS Controls Reference](https://github.com/uldyssian-sh/vmware-cis-vm/wiki/CIS-Controls)
+- [Remediation Guide](https://github.com/uldyssian-sh/vmware-cis-vm/wiki/Remediation)
 
-## Security
+## 📄 License
 
-- [Security Policy](SECURITY.md)
-- [Vulnerability Reporting](SECURITY.md#reporting-a-vulnerability)
-
-## Contributing
-
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-- 💬 Discussions: [GitHub Discussions](https://github.com/uldyssian-sh/vmware-cis-vm/discussions)
-- 🐛 Issues: [GitHub Issues](https://github.com/uldyssian-sh/vmware-cis-vm/issues)
-- 📖 Wiki: [Documentation Wiki](https://github.com/uldyssian-sh/vmware-cis-vm/wiki)
+MIT License - see [LICENSE](LICENSE) file for details.
