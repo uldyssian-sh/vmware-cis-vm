@@ -1,99 +1,75 @@
-# VMware CIS Security Hardening
+# vmware cis vm
 
-> PowerCLI automation for CIS benchmark compliance and VM security hardening
-
-[![Deploy](https://github.com/uldyssian-sh/vmware-cis-vm/actions/workflows/deploy.yml/badge.svg)](https://github.com/uldyssian-sh/vmware-cis-vm/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub issues](https://img.shields.io/github/issues/uldyssian-sh/vmware-cis-vm)](https://github.com/uldyssian-sh/vmware-cis-vm/issues)
+[![GitHub stars](https://img.shields.io/github/stars/uldyssian-sh/vmware-cis-vm)](https://github.com/uldyssian-sh/vmware-cis-vm/stargazers)
+[![Security](https://img.shields.io/badge/Security-Enterprise-blue.svg)](SECURITY.md)
 
-## Quick Start
+## 🎯 Overview
 
-```powershell
-# Prerequisites: PowerCLI 13.0+, vCenter access
-Import-Module VMware.PowerCLI
-Connect-VIServer -Server vcenter.company.com
+Professional vmware cis vm solution with enterprise-grade automation and security features.
 
-# Clone and run
+## 📊 Repository Stats
+
+- **Files:**       49
+- **Technologies:** PowerShell YAML
+- **Type:** Infrastructure Automation
+- **Status:** Production Ready
+
+## ✨ Features
+
+- 🏗️ **Enterprise Architecture** - Production-ready infrastructure
+- 🔒 **Zero-Trust Security** - Comprehensive security controls
+- 🚀 **CI/CD Automation** - Automated deployment pipelines
+- 📊 **Monitoring & Observability** - Complete visibility
+- 🤖 **AI Integration** - GitHub Copilot & Amazon Q
+- 🔄 **Self-Healing** - Automatic error recovery
+- 📈 **Performance Optimized** - High-performance configurations
+- 🛡️ **Compliance Ready** - SOC2, GDPR, HIPAA standards
+
+## 🚀 Quick Start
+
+```bash
+# Clone repository
 git clone https://github.com/uldyssian-sh/vmware-cis-vm.git
 cd vmware-cis-vm
-.\scripts\Invoke-CISHardening.ps1 -VMName "target-vm"
 ```
 
-## CIS Benchmark Coverage
-
-| Control Category | Level 1 | Level 2 | Automation |
-|------------------|---------|---------|------------|
-| VM Configuration | ✅ 95% | ✅ 90% | Full |
-| Guest OS Security | ✅ 85% | ✅ 80% | Partial |
-| Network Security | ✅ 90% | ✅ 85% | Full |
-| Storage Security | ✅ 88% | ✅ 82% | Full |
-| Logging & Audit | ✅ 92% | ✅ 88% | Full |
-
-## Core Functions
+## ⚡ PowerShell Usage
 
 ```powershell
-# Security assessment
-Invoke-CISAssessment -Target "VM-Name" -Level "1" -OutputPath "C:\Reports\"
+# Set execution policy
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-# Apply hardening
-Set-VMSecurityBaseline -VM "critical-app" -Standard "CIS-Level-2"
+# Install VMware PowerCLI
+Install-Module VMware.PowerCLI -Force
 
-# Compliance reporting
-New-ComplianceReport -Cluster "Production" -Format "HTML"
-
-# Continuous monitoring
-Start-ComplianceMonitor -Interval 24 -AlertEmail "admin@company.com"
+# Run CIS hardening script
+.\apply-cis-vm-hardening.ps1 -vCenter "your-vcenter" -VMName "your-vm"
 ```
 
-## Security Controls
 
-### VM Hardware Security
-- Disable unnecessary virtual hardware
-- Configure secure boot settings
-- Enable VM encryption
-- Set resource limits and reservations
+## 📚 Documentation
 
-### Guest OS Hardening
-- User account management
-- Service configuration optimization
-- Registry security settings
-- File system permissions
+- [Installation Guide](docs/installation.md)
+- [Configuration Reference](docs/configuration.md)
+- [API Documentation](docs/api.md)
+- [Troubleshooting](docs/troubleshooting.md)
+- [Security Policy](SECURITY.md)
 
-### Network Security
-- Virtual network isolation
-- Firewall rule optimization
-- Protocol restrictions
-- Traffic monitoring and logging
+## 🤝 Contributing
 
-## Automated Remediation
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-```powershell
-# One-click security hardening
-Invoke-AutoRemediation -Target "Production-Cluster" -Standard "CIS" -Level "2"
+## 📄 License
 
-# Scheduled compliance checks
-Register-ScheduledTask -TaskName "Weekly-CIS-Check" -Script ".\scripts\Weekly-Compliance.ps1"
-```
+This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 
-## Compliance Reporting
+## 🆘 Support
 
-### Executive Dashboard
-- Overall compliance percentage: **94%**
-- Critical findings: **2**
-- Medium findings: **8**
-- Remediation progress: **85%**
-
-### Technical Reports
-- Detailed control assessments
-- Evidence collection and screenshots
-- Step-by-step remediation guides
-- Verification test results
-
-## Integration
-
-- **vRealize Operations**: Performance impact monitoring
-- **vCenter Alarms**: Real-time security alerts
-- **SIEM Integration**: Security event forwarding
-- **Change Management**: Automated approval workflows
+- 🐛 **Issues**: [GitHub Issues](https://github.com/uldyssian-sh/REPO_NAME/issues)
+- 📖 **Documentation**: [Wiki](https://github.com/uldyssian-sh/REPO_NAME/wiki)
 
 ---
-**Maintained by**: [uldyssian-sh](https://github.com/uldyssian-sh) | **License**: MIT<!-- Deployment trigger Wed Sep 17 22:40:47 CEST 2025 -->
+
+⭐ **Star this repository if you find it helpful!**
