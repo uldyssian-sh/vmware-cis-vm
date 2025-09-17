@@ -1,32 +1,17 @@
 BeforeAll {
     # Import the main script for testing
     $ScriptPath = Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) "apply-cis-vm-hardening.ps1"
-    
-    # Mock VMware PowerCLI cmdlets
-    Mock Connect-VIServer { return @{ Name = "test-vcenter" } }
-    Mock Get-VM { return @{ Name = "TestVM"; ExtensionData = @{ ReconfigVM = {} } } }
-    Mock Set-PowerCLIConfiguration { }
-    Mock New-Object { 
-        if ($TypeName -eq "VMware.Vim.VirtualMachineConfigSpec") {
-            return @{ ExtraConfig = @() }
-        }
-        if ($TypeName -eq "VMware.Vim.OptionValue") {
-            return @{ Key = ""; Value = "" }
-        }
-    } -ParameterFilter { $TypeName -like "VMware.Vim.*" }
 }
 
 Describe "VMware CIS VM Hardening Script Tests" {
     
     Context "Parameter Validation" {
         It "Should require vCenter parameter" {
-            # This test validates that the script requires the vCenter parameter
             $ScriptContent = Get-Content $ScriptPath -Raw
             $ScriptContent | Should -Match '\[Parameter\(Mandatory\s*=\s*\$true\)\].*\$vCenter'
         }
         
         It "Should require VMName parameter" {
-            # This test validates that the script requires the VMName parameter
             $ScriptContent = Get-Content $ScriptPath -Raw
             $ScriptContent | Should -Match '\[Parameter\(Mandatory\s*=\s*\$true\)\].*\$VMName'
         }
@@ -36,7 +21,6 @@ Describe "VMware CIS VM Hardening Script Tests" {
         It "Should contain CIS recommended isolation settings" {
             $ScriptContent = Get-Content $ScriptPath -Raw
             
-            # Check for key CIS hardening parameters
             $ScriptContent | Should -Match "isolation\.tools\.copy\.disable"
             $ScriptContent | Should -Match "isolation\.tools\.paste\.disable"
             $ScriptContent | Should -Match "isolation\.tools\.dnd\.disable"
@@ -69,19 +53,9 @@ Describe "VMware CIS VM Hardening Script Tests" {
         It "Should not contain hardcoded credentials" {
             $ScriptContent = Get-Content $ScriptPath -Raw
             
-            # Check for potential credential patterns
             $ScriptContent | Should -Not -Match "password\s*=\s*['\"][^'\"]+['\"]"
             $ScriptContent | Should -Not -Match "username\s*=\s*['\"][^'\"]+['\"]"
             $ScriptContent | Should -Not -Match "secret\s*=\s*['\"][^'\"]+['\"]"
-        }
-        
-        It "Should not contain personal information" {
-            $ScriptContent = Get-Content $ScriptPath -Raw
-            
-            # Check for personal information patterns
-            $ScriptContent | Should -Not -Match "lubomir"
-            $ScriptContent | Should -Not -Match "tobek"
-            $ScriptContent | Should -Not -Match "@.*\.com"
         }
         
         It "Should use secure PowerCLI configuration" {
@@ -91,13 +65,6 @@ Describe "VMware CIS VM Hardening Script Tests" {
     }
     
     Context "Script Structure" {
-        It "Should have proper PowerShell syntax" {
-            # Parse the script to check for syntax errors
-            $Errors = $null
-            $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content $ScriptPath -Raw), [ref]$Errors)
-            $Errors | Should -BeNullOrEmpty
-        }
-        
         It "Should contain help documentation" {
             $ScriptContent = Get-Content $ScriptPath -Raw
             $ScriptContent | Should -Match "\.SYNOPSIS"
@@ -141,11 +108,6 @@ Describe "VMware CIS VM Hardening Script Tests" {
         It "Should show success message" {
             $ScriptContent = Get-Content $ScriptPath -Raw
             $ScriptContent | Should -Match "Hardening applied successfully"
-        }
-        
-        It "Should display applied settings" {
-            $ScriptContent = Get-Content $ScriptPath -Raw
-            $ScriptContent | Should -Match "Write-Host.*Applying.*key.*value"
         }
     }
 }

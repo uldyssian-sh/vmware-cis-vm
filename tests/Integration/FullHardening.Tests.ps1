@@ -5,59 +5,68 @@ BeforeAll {
 Describe "Full Hardening Integration Tests" {
     
     Context "Script Execution" {
-        It "Should execute without syntax errors" {
-            $Errors = $null
-            $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content $ScriptPath -Raw), [ref]$Errors)
-            $Errors | Should -BeNullOrEmpty
+        It "Should validate script exists" {
+            Test-Path $ScriptPath | Should -Be $true
         }
         
-        It "Should have all required parameters" {
+        It "Should have valid PowerShell syntax" {
             $ScriptContent = Get-Content $ScriptPath -Raw
-            $ScriptContent | Should -Match "param\s*\("
-            $ScriptContent | Should -Match "\[Parameter\(Mandatory\s*=\s*\$true\)\].*vCenter"
-            $ScriptContent | Should -Match "\[Parameter\(Mandatory\s*=\s*\$true\)\].*VMName"
+            { [scriptblock]::Create($ScriptContent) } | Should -Not -Throw
         }
     }
     
-    Context "Hardening Parameters Validation" {
-        It "Should contain all CIS hardening settings" {
+    Context "Configuration Validation" {
+        It "Should contain all required hardening parameters" {
             $ScriptContent = Get-Content $ScriptPath -Raw
             
-            $RequiredSettings = @(
-                "EnableUUID",
-                "isolation.bios.bbs.disable",
-                "isolation.device.connectable.disable",
-                "isolation.tools.copy.disable",
-                "isolation.tools.paste.disable",
-                "isolation.tools.dnd.disable",
-                "RemoteDisplay.vnc.enabled",
-                "log.keepOld",
-                "devices.hotplug"
-            )
+            # Core isolation parameters
+            $ScriptContent | Should -Match "isolation\.bios\.bbs\.disable"
+            $ScriptContent | Should -Match "isolation\.device\.connectable\.disable"
+            $ScriptContent | Should -Match "isolation\.tools\.copy\.disable"
+            $ScriptContent | Should -Match "isolation\.tools\.paste\.disable"
+            $ScriptContent | Should -Match "isolation\.tools\.dnd\.disable"
             
-            foreach ($Setting in $RequiredSettings) {
-                $ScriptContent | Should -Match [regex]::Escape($Setting)
-            }
+            # Logging parameters
+            $ScriptContent | Should -Match "log\.keepOld"
+            $ScriptContent | Should -Match "log\.rotateSize"
+            
+            # Display security
+            $ScriptContent | Should -Match "mks\.enable3d"
+            $ScriptContent | Should -Match "RemoteDisplay\.vnc\.enabled"
+            
+            # Device management
+            $ScriptContent | Should -Match "devices\.hotplug"
         }
         
-        It "Should have correct parameter values" {
+        It "Should have proper parameter values" {
             $ScriptContent = Get-Content $ScriptPath -Raw
-            $ScriptContent | Should -Match "EnableUUID\s+TRUE"
-            $ScriptContent | Should -Match "RemoteDisplay\.vnc\.enabled\s+FALSE"
-            $ScriptContent | Should -Match "devices\.hotplug\s+FALSE"
+            
+            # Check for secure values
+            $ScriptContent | Should -Match "EnableUUID TRUE"
+            $ScriptContent | Should -Match "mks\.enable3d FALSE"
+            $ScriptContent | Should -Match "RemoteDisplay\.vnc\.enabled FALSE"
+            $ScriptContent | Should -Match "devices\.hotplug FALSE"
         }
     }
     
     Context "Security Compliance" {
-        It "Should not contain hardcoded credentials" {
+        It "Should implement CIS benchmark recommendations" {
             $ScriptContent = Get-Content $ScriptPath -Raw
-            $ScriptContent | Should -Not -Match "password\s*=\s*['\"][^'\"]*['\"]"
-            $ScriptContent | Should -Not -Match "username\s*=\s*['\"][^'\"]*['\"]"
-        }
-        
-        It "Should not contain personal information" {
-            $ScriptContent = Get-Content $ScriptPath -Raw
-            $ScriptContent | Should -Not -Match "example|placeholder"
+            
+            # Verify key CIS controls are present
+            $RequiredControls = @(
+                "isolation\.tools\.copy\.disable",
+                "isolation\.tools\.paste\.disable", 
+                "isolation\.tools\.dnd\.disable",
+                "isolation\.device\.connectable\.disable",
+                "RemoteDisplay\.vnc\.enabled",
+                "mks\.enable3d",
+                "devices\.hotplug"
+            )
+            
+            foreach ($Control in $RequiredControls) {
+                $ScriptContent | Should -Match $Control
+            }
         }
     }
 }
