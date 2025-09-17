@@ -226,7 +226,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ⭐ **Star this repository if it helps secure your VMware infrastructure!**
 
-## 🚀 Latest Updates (v2.0.0)
+## 🚀 Latest Updates (v1.0.0)
 
 - Enhanced security framework with zero-trust architecture
 - Advanced performance monitoring and optimization
