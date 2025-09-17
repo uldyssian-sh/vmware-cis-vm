@@ -96,4 +96,4 @@ Register-ScheduledTask -TaskName "Weekly-CIS-Check" -Script ".\scripts\Weekly-Co
 - **Change Management**: Automated approval workflows
 
 ---
-**Maintained by**: [uldyssian-sh](https://github.com/uldyssian-sh) | **License**: MIT
+**Maintained by**: [uldyssian-sh](https://github.com/uldyssian-sh) | **License**: MIT<!-- Deployment trigger Wed Sep 17 22:40:47 CEST 2025 -->
