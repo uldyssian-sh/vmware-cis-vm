@@ -124,7 +124,7 @@ Applying 'isolation.tools.paste.disable' = 'TRUE'
 **Option 1: Interactive Prompt (Default)**
 ```powershell
 ./apply-cis-vm-hardening.ps1 -vCenter "vcenter.example.com" -VMName "MyVM"
-# Will prompt for username/password
+# Will prompt for credentials
 ```
 
 **Option 2: Stored Credentials**
