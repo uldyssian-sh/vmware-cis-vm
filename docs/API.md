@@ -1,64 +1,70 @@
-# API Reference
+# API Documentation
 
-## Parameters
+## PowerShell Cmdlets Reference
 
-### Required Parameters
+### apply-cis-vm-hardening.ps1
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `vCenter` | String | vCenter Server FQDN or IP |
-| `VMName` | String | Target VM name |
+Main hardening script that applies CIS security parameters to VMware VMs.
 
-### Optional Parameters
+#### Parameters
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `Credential` | PSCredential | Prompt | vCenter credentials |
-| `WhatIf` | Switch | False | Preview mode |
-| `Backup` | Switch | False | Create backup |
-| `LogPath` | String | Auto | Log file path |
+- **vCenter** (Required): vCenter Server FQDN or IP address
+- **VMName** (Required): Target Virtual Machine name
 
-## Return Values
-
-### Success
-```powershell
-@{
-    Status = "Success"
-    VMName = "MyVM"
-    SettingsApplied = 35
-    Timestamp = "2024-01-15T10:30:00Z"
-}
-```
-
-### Error
-```powershell
-@{
-    Status = "Error"
-    VMName = "MyVM"
-    ErrorMessage = "VM not found"
-    Timestamp = "2024-01-15T10:30:00Z"
-}
-```
-
-## Exit Codes
-
-| Code | Description |
-|------|-------------|
-| 0 | Success |
-| 1 | VM not found |
-| 2 | Connection failed |
-| 3 | Permission denied |
-| 4 | PowerCLI not found |
-
-## Examples
+#### Examples
 
 ```powershell
 # Basic usage
-./apply-cis-vm-hardening.ps1 -vCenter "vc.lab.com" -VMName "VM01"
+.\apply-cis-vm-hardening.ps1 -vCenter "vcenter.lab.com" -VMName "WebServer-01"
 
-# With backup
-./apply-cis-vm-hardening.ps1 -vCenter "vc.lab.com" -VMName "VM01" -Backup
+# With error handling
+try {
+    .\apply-cis-vm-hardening.ps1 -vCenter "vcenter.lab.com" -VMName "WebServer-01"
+    Write-Host "Hardening completed successfully"
+} catch {
+    Write-Error "Hardening failed: $($_.Exception.Message)"
+}
+```
 
-# Preview mode
-./apply-cis-vm-hardening.ps1 -vCenter "vc.lab.com" -VMName "VM01" -WhatIf
+#### Return Values
+
+- **0**: Success
+- **1**: Error (VM not found, connection failed, etc.)
+
+## Bulk Operations
+
+### bulk-hardening.ps1
+
+Apply hardening to multiple VMs using patterns.
+
+```powershell
+.\scripts\bulk-hardening.ps1 -vCenter "vcenter.com" -VMPattern "Prod*"
+```
+
+### validate-hardening.ps1
+
+Validate applied hardening settings.
+
+```powershell
+.\scripts\validate-hardening.ps1 -vCenter "vcenter.com" -VMName "TestVM"
+```
+
+## Configuration Options
+
+### Environment Variables
+
+- `VMWARE_CIS_CONFIG`: Path to custom configuration file
+- `VMWARE_CIS_LOG_LEVEL`: Logging verbosity (Verbose, Normal, Quiet)
+
+### Custom Parameters
+
+Override default hardening parameters via JSON configuration:
+
+```json
+{
+  "customParameters": {
+    "isolation.tools.unity.disable": "TRUE",
+    "log.keepOld": "15"
+  }
+}
 ```
