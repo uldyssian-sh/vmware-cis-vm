@@ -163,3 +163,18 @@ Thumbs.db
 node_modules/
 .vscode/settings.json
 .idea/
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.backup
+
+# OS files
+.DS_Store
+Thumbs.db
