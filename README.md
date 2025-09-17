@@ -246,3 +246,65 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Compliance**: SOC2, GDPR, HIPAA
 - **Architecture**: Microservices ready
 - **Monitoring**: Real-time observability
+
+## 📁 Complete Repository Structure
+
+### Core Scripts
+- `apply-cis-vm-hardening.ps1` - Main CIS hardening script
+- `scripts/bulk-hardening.ps1` - Bulk VM operations
+- `scripts/validate-hardening.ps1` - Settings validation
+
+### Configuration & Examples
+- `config/sample-config.json` - Configuration templates
+- `examples/basic-usage.ps1` - Simple usage examples
+- `examples/advanced-usage.ps1` - Advanced scenarios
+- `docker-compose.yml` - Container orchestration
+- `Dockerfile` - Container configuration
+
+### Testing Framework
+- `tests/Unit/Hardening.Tests.ps1` - Unit tests
+- `tests/Integration/FullHardening.Tests.ps1` - Integration tests
+- `tests/Run-Tests.ps1` - Test runner
+
+### Documentation Suite
+- `docs/INSTALLATION.md` - Installation guide
+- `docs/API.md` - API documentation
+- `TUTORIAL.md` - Complete tutorial
+- `wiki/` - Comprehensive wiki documentation
+
+### Enterprise Features
+- `SECURITY_ENHANCEMENTS.md` - Advanced security
+- `PERFORMANCE_METRICS.md` - Performance monitoring
+- `AUTOMATION_FRAMEWORK.md` - CI/CD automation
+- `COMPLIANCE_STANDARDS.md` - Regulatory compliance
+- `MONITORING_DASHBOARD.md` - Real-time monitoring
+- `API_VERSIONING.md` - API management
+- `DATA_ENCRYPTION.md` - Encryption implementation
+- `LOAD_BALANCING.md` - High availability
+- `MICROSERVICES.md` - Architecture patterns
+- `DISASTER_RECOVERY.md` - Business continuity
+- `OBSERVABILITY.md` - System monitoring
+- `SERVICE_MESH.md` - Service communication
+- `COST_OPTIMIZATION.md` - Resource optimization
+- `GOVERNANCE.md` - IT governance
+
+### Security & Compliance
+- `SECURITY.md` - Security policy
+- `SECURITY_HARDENING.md` - Hardening guide
+- `BACKUP_INTEGRITY.md` - Backup validation
+- `CREDENTIAL_MANAGEMENT.md` - Secure credentials
+- `INPUT_SANITIZATION.md` - Input validation
+- `NETWORK_SECURITY.md` - Network protection
+
+### Development & Operations
+- `.github/workflows/` - CI/CD pipelines
+- `.github/ISSUE_TEMPLATE/` - Issue templates
+- `CONTRIBUTING.md` - Contribution guidelines
+- `CODE_OF_CONDUCT.md` - Community standards
+- `CHANGELOG.md` - Version history
+
+### AI Integration
+- `AI_INTEGRATION.md` - AI development support
+- `AMAZON_Q_INTEGRATION.md` - Amazon Q integration
+- `.amazonq/config.yml` - AI configuration
+
