@@ -1,7 +1,22 @@
 # VMware CIS Virtual Machine Hardening
 
 <div align="center">
-  <img src="https://www.cisecurity.org/wp-content/uploads/2020/12/CIS-Logo.png" alt="CIS Benchmarks" width="300"/>
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                CIS VM Hardening Framework                   │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
+│  │   vCenter   │────│ CIS Audit   │────│ Compliance  │     │
+│  │ Connection  │    │   Engine    │    │   Reports   │     │
+│  └─────────────┘    └─────────────┘    └─────────────┘     │
+│         │                   │                   │          │
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐     │
+│  │ Virtual     │    │ Security    │    │ Remediation │     │
+│  │ Machines    │    │ Controls    │    │   Scripts   │     │
+│  └─────────────┘    └─────────────┘    └─────────────┘     │
+└─────────────────────────────────────────────────────────────┘
+```
   
   [![CIS Benchmark](https://img.shields.io/badge/CIS-Benchmark-blue.svg)](https://www.cisecurity.org/cis-benchmarks/)
   [![VMware](https://img.shields.io/badge/VMware-vSphere-00A1C9.svg)](https://www.vmware.com/products/vsphere.html)
@@ -37,21 +52,6 @@ python cis_vm_audit.py --vm-name "production-vm-01" --report-format html
 # Apply hardening
 python cis_vm_harden.py --vm-name "production-vm-01" --apply-fixes
 ```
-
-## 📊 Compliance Dashboard
-
-![CIS Compliance](https://via.placeholder.com/800x400/4A90E2/FFFFFF?text=CIS+VM+Compliance+Dashboard)
-
-## 🔧 Supported Controls
-
-| Category | Controls | Windows | Linux |
-|----------|----------|---------|-------|
-| Account Policies | 15 | ✅ | ✅ |
-| Local Policies | 25 | ✅ | ✅ |
-| Event Log | 12 | ✅ | ✅ |
-| System Services | 18 | ✅ | ✅ |
-| Registry | 30 | ✅ | N/A |
-| File Permissions | 20 | ✅ | ✅ |
 
 ## 📚 Documentation
 
