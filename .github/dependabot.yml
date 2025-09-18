@@ -1,3 +1,4 @@
+---
 version: 2
 updates:
   - package-ecosystem: "github-actions"
@@ -10,7 +11,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-    
+
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
@@ -26,7 +27,7 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "prettier"
         update-types: ["version-update:semver-major"]
-    
+
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
@@ -37,7 +38,7 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
-    
+
   - package-ecosystem: "docker"
     directory: "/"
     schedule:

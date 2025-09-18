@@ -1,6 +1,7 @@
+---
 name: CI
 
-on:
+"on":
   push:
     branches: [main, master]
   pull_request:
@@ -16,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Validate PowerShell syntax
         shell: pwsh
         run: |
@@ -25,7 +26,7 @@ jobs:
             $null = [System.Management.Automation.PSParser]::Tokenize((Get-Content $_.FullName -Raw), [ref]$null)
             Write-Host "✅ $($_.Name) syntax is valid"
           }
-          
+
       - name: Validate JSON files
         run: |
           find . -name "*.json" -type f | while read file; do
@@ -33,7 +34,7 @@ jobs:
             python -m json.tool "$file" > /dev/null
             echo "✅ $file is valid JSON"
           done
-          
+
       - name: Validate YAML files
         run: |
           sudo apt-get update && sudo apt-get install -y yamllint
@@ -42,7 +43,7 @@ jobs:
             yamllint "$file"
             echo "✅ $file is valid YAML"
           done
-          
+
       - name: Check for sensitive data
         run: |
           if grep -r -i "password\|secret\|key\|token" --include="*.ps1" --include="*.json" --include="*.yml" .; then

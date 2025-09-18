@@ -1,3 +1,4 @@
+---
 # Docker Compose removed to eliminate package costs
 # Run PowerShell script directly instead:
 # pwsh ./apply-cis-vm-hardening.ps1 -vCenter $VCENTER_SERVER -VMName $VM_NAME

@@ -1,6 +1,7 @@
+---
 name: Release
 
-on:
+"on":
   push:
     tags:
       - 'v*'
@@ -15,13 +16,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
+
       - name: Generate changelog
         id: changelog
         run: |
           echo "## Changes" > RELEASE_NOTES.md
           git log --pretty=format:"- %s" $(git describe --tags --abbrev=0 HEAD^)..HEAD >> RELEASE_NOTES.md
-          
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
