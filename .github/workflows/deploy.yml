@@ -21,7 +21,7 @@ jobs:
       - uses: actions/configure-pages@v4
       - name: Build development site
         run: |
-          mkdir _site
+          mkdir -p _site
           cat > _site/index.html << 'HTML'
 <!DOCTYPE html>
 <html>

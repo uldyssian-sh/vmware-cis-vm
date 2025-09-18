@@ -1,0 +1,16 @@
+# Global owners
+* @uldyssian-sh
+
+# Workflows and CI/CD
+/.github/ @uldyssian-sh @actions-user
+
+# PowerShell scripts
+*.ps1 @uldyssian-sh
+
+# Documentation
+*.md @uldyssian-sh
+
+# Configuration files
+*.json @uldyssian-sh
+*.yml @uldyssian-sh
+*.yaml @uldyssian-sh

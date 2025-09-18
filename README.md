@@ -2,6 +2,11 @@
 
 <div align="center">
 
+[![Deploy](https://github.com/uldyssian-sh/vmware-cis-vm/actions/workflows/deploy.yml/badge.svg)](https://github.com/uldyssian-sh/vmware-cis-vm/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CIS Benchmark](https://img.shields.io/badge/CIS-Benchmark-blue.svg)](https://www.cisecurity.org/cis-benchmarks/)
+[![VMware](https://img.shields.io/badge/VMware-vSphere-00A1C9.svg)](https://www.vmware.com/products/vsphere.html)
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                CIS VM Hardening Framework                   │
@@ -17,10 +22,7 @@
 │  └─────────────┘    └─────────────┘    └─────────────┘     │
 └─────────────────────────────────────────────────────────────┘
 ```
-  
-  [![CIS Benchmark](https://img.shields.io/badge/CIS-Benchmark-blue.svg)](https://www.cisecurity.org/cis-benchmarks/)
-  [![VMware](https://img.shields.io/badge/VMware-vSphere-00A1C9.svg)](https://www.vmware.com/products/vsphere.html)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 </div>
 
 ## 🛡️ Overview
@@ -30,27 +32,22 @@ Automated CIS (Center for Internet Security) benchmark compliance tool for VMwar
 ## 🎯 Features
 
 - **CIS Benchmark Compliance**: Automated security hardening
-- **Multi-OS Support**: Windows and Linux virtual machines
+- **Multi-OS Support**: Windows and Linux virtual machines  
 - **Compliance Reporting**: Detailed security assessment reports
 - **Remediation Scripts**: Automated fix deployment
 - **Audit Logging**: Complete audit trail of changes
 
 ## 🚀 Quick Start
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
+```powershell
+# Prerequisites: PowerCLI 13.0+, vCenter access
+Import-Module VMware.PowerCLI
+Connect-VIServer -Server vcenter.company.com
 
-# Configure vCenter connection
-export VCENTER_HOST="vcenter.example.com"
-export VCENTER_USER="administrator@vsphere.local"
-export VCENTER_PASS="password"
-
-# Run CIS compliance check
-python cis_vm_audit.py --vm-name "production-vm-01" --report-format html
-
-# Apply hardening
-python cis_vm_harden.py --vm-name "production-vm-01" --apply-fixes
+# Clone and run
+git clone https://github.com/uldyssian-sh/vmware-cis-vm.git
+cd vmware-cis-vm
+.\apply-cis-vm-hardening.ps1 -vCenter "vcenter.company.com" -VMName "target-vm"
 ```
 
 ## 📚 Documentation
