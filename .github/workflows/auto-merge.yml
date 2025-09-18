@@ -1,6 +1,7 @@
+---
 name: Auto-merge Dependabot PRs
 
-on:
+"on":
   pull_request:
     types: [opened, synchronize]
 
@@ -14,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Check if PR is from Dependabot
         id: check-dependabot
         run: |
@@ -23,7 +24,7 @@ jobs:
           else
             echo "is_dependabot=false" >> $GITHUB_OUTPUT
           fi
-          
+
       - name: Enable auto-merge for Dependabot PRs
         if: steps.check-dependabot.outputs.is_dependabot == 'true'
         run: |
