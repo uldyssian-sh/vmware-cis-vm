@@ -1,3 +1,4 @@
+---
 # Amazon Q Developer Configuration
 # Optimizes AI assistance for this repository
 
@@ -22,13 +23,13 @@ documentation:
   auto_generate: true
   style: "comprehensive"
   include_examples: true
-  
+
 # Security scanning
 security:
   enabled: true
   scan_dependencies: true
   check_secrets: true
-  
+
 # Best practices enforcement
 best_practices:
   enforce: true
