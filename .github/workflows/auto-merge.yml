@@ -16,18 +16,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check if PR is from Dependabot
-        id: check-dependabot
+      - name: Auto-approve Dependabot PRs
+        if: github.actor == 'dependabot[bot]'
         run: |
-          if [[ "${{ github.actor }}" == "dependabot[bot]" ]]; then
-            echo "is_dependabot=true" >> $GITHUB_OUTPUT
-          else
-            echo "is_dependabot=false" >> $GITHUB_OUTPUT
-          fi
+          gh pr review --approve "${{ github.event.pull_request.number }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Enable auto-merge for Dependabot PRs
-        if: steps.check-dependabot.outputs.is_dependabot == 'true'
+      - name: Label Dependabot PRs
+        if: github.actor == 'dependabot[bot]'
         run: |
-          gh pr merge --auto --squash "${{ github.event.pull_request.number }}"
+          gh pr edit "${{ github.event.pull_request.number }}" --add-label "dependencies"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
