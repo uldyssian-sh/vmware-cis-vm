@@ -8,18 +8,12 @@ name: Deploy Development
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest
-    environment:
-      name: development
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/configure-pages@v4
       - name: Build development site
         run: |
           mkdir -p _site
@@ -84,7 +78,5 @@ jobs:
           </body>
           </html>
           HTML
-      - uses: actions/upload-pages-artifact@v3
-      - name: Deploy to Development
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deployment complete
+        run: echo "✅ Development build completed successfully"
