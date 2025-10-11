@@ -1,10 +1,8 @@
----
-# GitHub Copilot Configuration - REMOVED
-#
-# Note: GitHub Copilot doesn't use .github/copilot.yml files
-# Copilot settings are managed through:
-# - IDE extensions (VS Code, JetBrains)
-# - GitHub account settings
-# - Organization policies
-#
-# This file has been disabled to prevent confusion
+version: 2
+github_models:
+  - gpt-4
+  - gpt-3.5-turbo
+copilot:
+  enable_auto_completions: true
+  enable_suggestions: true
+  enable_chat: true
