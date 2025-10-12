@@ -2,28 +2,12 @@
 
 ## Supported Versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| Latest  | :white_check_mark: |
+We support security updates for the latest version of this project.
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please report it by:
+Please report security vulnerabilities by creating an issue or contacting the maintainers directly.
 
-1. **Email**: Create an issue at [GitHub Issues](../../issues/new)
-2. **Private Report**: Use GitHub's private vulnerability reporting feature
-3. **Response Time**: We aim to respond within 48 hours
+## Dependency Management
 
-## Security Features
-
-- Regular dependency updates via Dependabot
-- Automated security scanning
-- Code quality analysis
-
-## Best Practices
-
-- Keep dependencies up to date
-- Follow secure coding practices
-- Report security issues responsibly
-
-Thank you for helping keep our project secure!
+This project uses automated dependency scanning with Trivy. Known false positives and low-risk vulnerabilities are documented in `.trivyignore`.
