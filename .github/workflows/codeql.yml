@@ -1,4 +1,4 @@
-name: "CodeQL"
+name: CodeQL
 
 on:
   push:
@@ -10,13 +10,6 @@ permissions:
   contents: read
   security-events: write
   actions: read
-
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  schedule:
-    - cron: '0 2 * * 1'
 
 jobs:
   analyze:
