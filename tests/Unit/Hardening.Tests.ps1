@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 BeforeAll {
     # Import the main script for testing
     $ScriptPath = Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) "apply-cis-vm-hardening.ps1"

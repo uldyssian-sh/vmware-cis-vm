@@ -1,3 +1,4 @@
+$ErrorActionPreference = "Stop"
 ﻿<#
 .SYNOPSIS
   CIS Hardening for vSphere Virtual Machines
