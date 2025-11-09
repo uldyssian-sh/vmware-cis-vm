@@ -3,9 +3,7 @@
 <div align="center">
 
 [![Minimal Workflow](https://github.com/uldyssian-sh/vmware-cis-vm/actions/workflows/minimal.yml/badge.svg)](https://github.com/uldyssian-sh/vmware-cis-vm/actions/workflows/minimal.yml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![CIS Benchmark](https://img.shields.io/badge/CIS-Benchmark-blue.svg)](https://www.cisecurity.org/cis-benchmarks/)
-[![VMware](https://img.shields.io/badge/VMware-vSphere-00A1C9.svg)](https://www.vmware.com/products/vsphere.html)
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
