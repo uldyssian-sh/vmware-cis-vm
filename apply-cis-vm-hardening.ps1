@@ -121,3 +121,4 @@ Write-Host "✅ Hardening applied successfully to VM '$VMName'." -ForegroundColo
 
 # Optional: Disconnect from vCenter
 #Disconnect-VIServer -Server $vCenter -Confirm:$false
+# Updated Sun Nov  9 12:52:26 CET 2025
