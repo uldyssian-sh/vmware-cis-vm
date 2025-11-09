@@ -29,3 +29,4 @@ foreach ($VM in $Config.VMs) {
 }
 
 $Results | ConvertTo-Json | Out-File "hardening-results-$(Get-Date -Format 'yyyyMMdd-HHmmss').json"# Updated Sun Nov  9 12:52:26 CET 2025
+# Updated Sun Nov  9 12:56:27 CET 2025

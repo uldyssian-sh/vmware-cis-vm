@@ -45,3 +45,4 @@ foreach ($Check in $Checks.GetEnumerator()) {
 $Results | Format-Table -AutoSize
 $PassCount = ($Results | Where-Object { $_.Status -eq "PASS" }).Count
 Write-Host "Compliance: $PassCount/$($Results.Count) checks passed" -ForegroundColor $(if ($PassCount -eq $Results.Count) { "Green" } else { "Yellow" })# Updated Sun Nov  9 12:52:26 CET 2025
+# Updated Sun Nov  9 12:56:27 CET 2025
