@@ -121,7 +121,6 @@ function Invoke-VMHardening {
         }
         
         # Set custom properties (vRA API call would go here)
-        Write-Host "Updated vRA custom properties for `$VMName" -ForegroundColor Green
         
         return @{
             Success = `$true

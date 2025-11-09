@@ -165,4 +165,3 @@ for ($i = 0; $i -lt $AllVMs.Count; $i += $BatchSize) {
     # Wait for batch completion
     Get-Job | Wait-Job | Remove-Job
 }
-```# Updated 20251109_123814
