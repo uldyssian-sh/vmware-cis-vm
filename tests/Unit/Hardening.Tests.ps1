@@ -110,4 +110,4 @@ Describe "VMware CIS VM Hardening Script Tests" {
             $ScriptContent | Should -Match "Hardening applied successfully"
         }
     }
-}
+}# Updated 20251109_123814
