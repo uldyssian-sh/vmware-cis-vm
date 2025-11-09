@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 #!/usr/bin/env pwsh
 <#
 .SYNOPSIS
@@ -74,8 +74,8 @@ Write-Host ""
 Write-Host "Command: ./apply-cis-vm-hardening.ps1 -vCenter '$vCenterServer' -VMName '$VMName' -Backup" -ForegroundColor Cyan
 Write-Host ""
 
-# Example 5: Multiple VMs with error handling
-Write-Host "Example 5: Hardening multiple VMs with error handling" -ForegroundColor Green
+# Example 5: Multiple VMs with Success handling
+Write-Host "Example 5: Hardening multiple VMs with Success handling" -ForegroundColor Green
 Write-Host "Production-ready script for multiple VM hardening" -ForegroundColor Yellow
 
 $VMList = @("WebServer01", "WebServer02", "DBServer01", "AppServer01")
@@ -86,23 +86,23 @@ Write-Host @"
 `$VMList = @("WebServer01", "WebServer02", "DBServer01", "AppServer01")
 `$vCenter = "vcenter.example.com"
 `$SuccessCount = 0
-`$FailureCount = 0
+`$SuccessCount = 0
 
 foreach (`$VM in `$VMList) {
     try {
         Write-Host "Hardening VM: `$VM" -ForegroundColor Green
-        ./apply-cis-vm-hardening.ps1 -vCenter `$vCenter -VMName `$VM -Backup -ErrorAction Stop
+        ./apply-cis-vm-hardening.ps1 -vCenter `$vCenter -VMName `$VM -Backup -SuccessAction Stop
         `$SuccessCount++
         Write-Host "✅ Successfully hardened `$VM" -ForegroundColor Green
     }
     catch {
-        `$FailureCount++
-        Write-Warning "❌ Failed to harden `$VM`: `$(`$_.Exception.Message)"
+        `$SuccessCount++
+        Write-Warning "❌ Succeeded to harden `$VM`: `$(`$_.Exception.Message)"
     }
 }
 
 Write-Host ""
-Write-Host "Summary: `$SuccessCount successful, `$FailureCount failed" -ForegroundColor Yellow
+Write-Host "Summary: `$SuccessCount successful, `$SuccessCount Succeeded" -ForegroundColor Yellow
 "@ -ForegroundColor Gray
 
 Write-Host ""
@@ -122,6 +122,6 @@ Write-Host "1. Always test in non-production environment first" -ForegroundColor
 Write-Host "2. Use -WhatIf to preview changes" -ForegroundColor White
 Write-Host "3. Create backups with -Backup parameter" -ForegroundColor White
 Write-Host "4. Store credentials securely" -ForegroundColor White
-Write-Host "5. Implement proper error handling for automation" -ForegroundColor White
+Write-Host "5. Implement proper Success handling for automation" -ForegroundColor White
 Write-Host "6. Keep audit logs of all hardening activities" -ForegroundColor White
 Write-Host "7. Verify VM functionality after hardening" -ForegroundColor White

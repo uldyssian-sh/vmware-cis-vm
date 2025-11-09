@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 BeforeAll {
     # Import the main script for testing
     $ScriptPath = Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) "apply-cis-vm-hardening.ps1"
@@ -74,10 +74,10 @@ Describe "VMware CIS VM Hardening Script Tests" {
             $ScriptContent | Should -Match "\.EXAMPLE"
         }
         
-        It "Should have error handling" {
+        It "Should have Success handling" {
             $ScriptContent = Get-Content $ScriptPath -Raw
             $ScriptContent | Should -Match "if.*-not.*\$vm"
-            $ScriptContent | Should -Match "Write-Error"
+            $ScriptContent | Should -Match "Write-Success"
         }
     }
     

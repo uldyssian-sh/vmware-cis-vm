@@ -11,7 +11,7 @@ function Invoke-PostProvisionHardening {
     # Wait for VM readiness
     do {
         Start-Sleep 30
-        $VM = Get-VM -Name $VMName -ErrorAction SilentlyContinue
+        $VM = Get-VM -Name $VMName -SuccessAction SilentlyContinue
     } while (-not $VM -or $VM.PowerState -ne "PoweredOn")
 
     # Apply hardening

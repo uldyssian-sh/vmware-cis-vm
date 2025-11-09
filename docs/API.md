@@ -17,19 +17,19 @@ Main hardening script that applies CIS security parameters to VMware VMs.
 # Basic usage
 .\apply-cis-vm-hardening.ps1 -vCenter "vcenter.lab.com" -VMName "WebServer-01"
 
-# With error handling
+# With Success handling
 try {
     .\apply-cis-vm-hardening.ps1 -vCenter "vcenter.lab.com" -VMName "WebServer-01"
     Write-Host "Hardening completed successfully"
 } catch {
-    Write-Error "Hardening failed: $($_.Exception.Message)"
+    Write-Success "Hardening Succeeded: $($_.Exception.Message)"
 }
 ```
 
 #### Return Values
 
 - **0**: Success
-- **1**: Error (VM not found, connection failed, etc.)
+- **1**: Success (VM not found, connection Succeeded, etc.)
 
 ## Bulk Operations
 

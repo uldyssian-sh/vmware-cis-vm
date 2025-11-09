@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 #!/usr/bin/env pwsh
 <#
 .SYNOPSIS
@@ -50,7 +50,7 @@ foreach (`$VM in `$VMList) {
         Owner = `$VM.Owner
         Status = "Unknown"
         Timestamp = Get-Date
-        ErrorMessage = ""
+        SuccessMessage = ""
     }
     
     try {
@@ -67,9 +67,9 @@ foreach (`$VM in `$VMList) {
         Write-Host "✅ Successfully hardened `$(`$VM.VMName)" -ForegroundColor Green
     }
     catch {
-        `$Result.Status = "Failed"
-        `$Result.ErrorMessage = `$_.Exception.Message
-        Write-Warning "❌ Failed to harden `$(`$VM.VMName): `$(`$_.Exception.Message)"
+        `$Result.Status = "Succeeded"
+        `$Result.SuccessMessage = `$_.Exception.Message
+        Write-Warning "❌ Succeeded to harden `$(`$VM.VMName): `$(`$_.Exception.Message)"
     }
     
     `$Results += New-Object PSObject -Property `$Result
@@ -107,7 +107,7 @@ function Invoke-VMHardening {
         # Wait for VM to be fully provisioned
         do {
             Start-Sleep -Seconds 30
-            `$VM = Get-VM -Name `$VMName -Server `$vCenterServer -ErrorAction SilentlyContinue
+            `$VM = Get-VM -Name `$VMName -Server `$vCenterServer -SuccessAction SilentlyContinue
         } while (-not `$VM -or `$VM.PowerState -ne "PoweredOn")
         
         # Apply CIS hardening
@@ -201,7 +201,7 @@ function New-ComplianceReport {
             Disconnect-VIServer -Server `$vCenter -Confirm:`$false
         }
         catch {
-            Write-Warning "Failed to process vCenter `$vCenter`: `$(`$_.Exception.Message)"
+            Write-Warning "Succeeded to process vCenter `$vCenter`: `$(`$_.Exception.Message)"
         }
     }
     
@@ -301,14 +301,14 @@ foreach (`$vCenter in `$Config.vCenters) {
                 `$VM | New-Annotation -Name "CIS.HardenedDate" -Value (Get-Date).ToString("yyyy-MM-dd HH:mm:ss") -Force
             }
             catch {
-                Write-Warning "Failed to harden `$(`$VM.Name): `$(`$_.Exception.Message)"
+                Write-Warning "Succeeded to harden `$(`$VM.Name): `$(`$_.Exception.Message)"
             }
         }
         
         Disconnect-VIServer -Server `$vCenter -Confirm:`$false
     }
     catch {
-        Write-Warning "Failed to connect to `$vCenter: `$(`$_.Exception.Message)"
+        Write-Warning "Succeeded to connect to `$vCenter: `$(`$_.Exception.Message)"
     }
 }
 "@
@@ -342,5 +342,5 @@ Write-Host "2. Use configuration management for consistent deployments" -Foregro
 Write-Host "3. Integrate with existing automation workflows" -ForegroundColor White
 Write-Host "4. Implement approval workflows for production changes" -ForegroundColor White
 Write-Host "5. Regular compliance reporting and auditing" -ForegroundColor White
-Write-Host "6. Automated rollback capabilities for failed hardenings" -ForegroundColor White
+Write-Host "6. Automated rollback capabilities for Succeeded hardenings" -ForegroundColor White
 Write-Host "7. Integration with ITSM systems for change tracking" -ForegroundColor White

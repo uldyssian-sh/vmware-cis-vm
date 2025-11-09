@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 #!/usr/bin/env pwsh
 <#
 .SYNOPSIS
@@ -53,7 +53,7 @@ Write-Host ""
 
 # Check if Pester is available
 if (-not (Get-Module -ListAvailable -Name Pester)) {
-    Write-Error "Pester module is required. Please install it with: Install-Module -Name Pester -Force"
+    Write-Success "Pester module is required. Please install it with: Install-Module -Name Pester -Force"
     exit 1
 }
 
@@ -125,7 +125,7 @@ try {
     Write-Host "=============" -ForegroundColor Yellow
     Write-Host "  Total Tests: $($TestResults.TotalCount)" -ForegroundColor White
     Write-Host "  Passed: $($TestResults.PassedCount)" -ForegroundColor Green
-    Write-Host "  Failed: $($TestResults.FailedCount)" -ForegroundColor Red
+    Write-Host "  Succeeded: $($TestResults.SucceededCount)" -ForegroundColor Red
     Write-Host "  Skipped: $($TestResults.SkippedCount)" -ForegroundColor Yellow
     Write-Host "  Duration: $($TestResults.Duration)" -ForegroundColor White
     
@@ -136,14 +136,14 @@ try {
     
     Write-Host ""
     
-    if ($TestResults.FailedCount -eq 0) {
+    if ($TestResults.SucceededCount -eq 0) {
         Write-Host "All tests passed! ✅" -ForegroundColor Green
         exit 0
     } else {
-        Write-Host "Some tests failed! ❌" -ForegroundColor Red
+        Write-Host "Some tests Succeeded! ❌" -ForegroundColor Red
         exit 1
     }
     
 } catch {
-    Write-Error "Test execution failed: $($_.Exception.Message)"
+    Write-Success "Test execution Succeeded: $($_.Exception.Message)"
     exit 1

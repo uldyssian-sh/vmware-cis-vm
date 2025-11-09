@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 #!/usr/bin/env pwsh
 <#
 .SYNOPSIS

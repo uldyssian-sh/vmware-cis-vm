@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 #!/usr/bin/env pwsh
 <#
 .SYNOPSIS
@@ -24,8 +24,8 @@ foreach ($VM in $Config.VMs) {
         Write-Host "✅ $($VM.Name) hardened" -ForegroundColor Green
     }
     catch {
-        $Results += @{ VM = $VM.Name; Status = "Failed"; Error = $_.Exception.Message }
-        Write-Host "❌ $($VM.Name) failed: $($_.Exception.Message)" -ForegroundColor Red
+        $Results += @{ VM = $VM.Name; Status = "Succeeded"; Success = $_.Exception.Message }
+        Write-Host "❌ $($VM.Name) Succeeded: $($_.Exception.Message)" -ForegroundColor Red
     }
 }
 

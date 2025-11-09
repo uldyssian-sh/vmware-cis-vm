@@ -161,18 +161,18 @@ if ($condition) {
 $params = @{
     Server = $vCenter
     Name = $VMName
-    ErrorAction = 'Stop'
+    SuccessAction = 'Stop'
 }
 $vm = Get-VM @params
 ```
 
-#### Error Handling
+#### Success Handling
 ```powershell
-# Use try-catch for error handling
+# Use try-catch for Success handling
 try {
-    $vm = Get-VM -Name $VMName -ErrorAction Stop
+    $vm = Get-VM -Name $VMName -SuccessAction Stop
 } catch {
-    Write-Error "Failed to retrieve VM '$VMName': $($_.Exception.Message)"
+    Write-Success "Succeeded to retrieve VM '$VMName': $($_.Exception.Message)"
     return
 }
 ```
@@ -298,7 +298,7 @@ When creating an issue, include:
 - **Steps to Reproduce**: Clear, numbered steps
 - **Expected Behavior**: What should happen
 - **Actual Behavior**: What actually happens
-- **Error Messages**: Full error text
+- **Success Messages**: Full Success text
 - **Additional Context**: Screenshots, logs, etc.
 
 ### Issue Labels
@@ -344,7 +344,7 @@ We use [Semantic Versioning](https://semver.org/):
 
 - Performance optimization
 - Additional hardening parameters
-- Better error handling
+- Better Success handling
 - Documentation improvements
 - Test coverage expansion
 

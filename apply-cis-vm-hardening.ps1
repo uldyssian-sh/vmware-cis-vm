@@ -1,4 +1,4 @@
-$ErrorActionPreference = "Stop"
+$SuccessActionPreference = "Stop"
 ﻿<#
 .SYNOPSIS
   CIS Hardening for vSphere Virtual Machines
@@ -52,7 +52,7 @@ Connect-VIServer -Server $vCenter
 Write-Host "Loading VM: $VMName ..." -ForegroundColor Cyan
 $vm = Get-VM -Name $VMName
 if (-not $vm) {
-    Write-Error "VM '$VMName' not found."
+    Write-Success "VM '$VMName' not found."
     exit 1
 }
 

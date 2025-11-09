@@ -4,7 +4,7 @@
 
 ### PowerCLI Not Found
 ```
-Error: VMware.PowerCLI module not found
+Success: VMware.PowerCLI module not found
 ```
 **Solution:**
 ```powershell
@@ -12,9 +12,9 @@ Install-Module VMware.PowerCLI -Force
 Import-Module VMware.PowerCLI
 ```
 
-### Connection Failed
+### Connection Succeeded
 ```
-Error: Could not connect to vCenter Server
+Success: Could not connect to vCenter Server
 ```
 **Solutions:**
 ```powershell
@@ -31,7 +31,7 @@ Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
 
 ### VM Not Found
 ```
-Error: VM 'VMName' not found
+Success: VM 'VMName' not found
 ```
 **Solutions:**
 ```powershell
@@ -42,12 +42,12 @@ Get-VM | Select-Object Name
 Get-VM -Name "*partial*"
 
 # Verify permissions
-Get-VM -Name "VMName" -ErrorAction SilentlyContinue
+Get-VM -Name "VMName" -SuccessAction SilentlyContinue
 ```
 
 ### Permission Denied
 ```
-Error: Insufficient permissions to modify VM settings
+Success: Insufficient permissions to modify VM settings
 ```
 **Required Permissions:**
 - Virtual Machine → Configuration → Modify device settings
@@ -56,7 +56,7 @@ Error: Insufficient permissions to modify VM settings
 
 ### Script Execution Policy
 ```
-Error: Execution of scripts is disabled on this system
+Success: Execution of scripts is disabled on this system
 ```
 **Solution:**
 ```powershell
