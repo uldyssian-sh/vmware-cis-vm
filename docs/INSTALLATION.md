@@ -58,4 +58,4 @@ Set-PowerCLIConfiguration -ParticipateInCEIP $false -Confirm:$false
 
 ```powershell
 Get-Module VMware.PowerCLI -ListAvailable
-```
+```# Updated Sun Nov  9 12:49:54 CET 2025

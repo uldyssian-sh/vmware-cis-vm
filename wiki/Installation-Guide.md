@@ -49,3 +49,4 @@ docker run -e VCENTER_SERVER=vcenter.example.com -e VM_NAME=MyVM vmware-cis-vm
 Get-Module VMware.PowerCLI -ListAvailable
 Test-Path ./apply-cis-vm-hardening.ps1
 ```# Updated 20251109_123814
+# Updated Sun Nov  9 12:49:54 CET 2025

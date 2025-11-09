@@ -34,4 +34,4 @@ jobs:
         if: always()
         with:
           sarif_file: 'trivy-results.sarif'
-          category: 'security-scan'
+          category: 'security-scan'# Updated Sun Nov  9 12:49:54 CET 2025
