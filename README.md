@@ -1,5 +1,11 @@
 # VMware CIS Virtual Machine Hardening
 
+[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-cis-vm?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
+[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-cis-vm?style=flat-square)](#)
+[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-cis-vm?style=flat-square)](#)
+[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
+
 <div align="center">
 
 [![Minimal Workflow](https://github.com/uldyssian-sh/vmware-cis-vm/actions/workflows/minimal.yml/badge.svg)](https://github.com/uldyssian-sh/vmware-cis-vm/actions/workflows/minimal.yml)
@@ -39,6 +45,12 @@ Automated CIS (Center for Internet Security) benchmark compliance tool for VMwar
 
 ```powershell
 # Prerequisites: PowerCLI 13.0+, vCenter access
+
+[![License](https://img.shields.io/github/license/uldyssian-sh/vmware-cis-vm?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)](#)
+[![Languages](https://img.shields.io/github/languages/count/uldyssian-sh/vmware-cis-vm?style=flat-square)](#)
+[![Size](https://img.shields.io/github/repo-size/uldyssian-sh/vmware-cis-vm?style=flat-square)](#)
+[![Security Scan](https://img.shields.io/badge/security-scanned-green?style=flat-square)](#)
 Import-Module VMware.PowerCLI
 Connect-VIServer -Server vcenter.company.com
 
