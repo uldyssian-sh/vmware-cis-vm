@@ -45,3 +45,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 **Maintained by**: [uldyssian-sh](https://github.com/uldyssian-sh)
+⭐ Star this repository if you find it helpful!
