@@ -178,3 +178,8 @@ logs/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Security - Sensitive Files
+.env
+config.json
+secrets.json
