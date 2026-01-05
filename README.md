@@ -44,5 +44,4 @@ Edit [`config/sample-config.json`](config/sample-config.json) to customize harde
 MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
-**Maintained by**: [uldyssian-sh](https://github.com/uldyssian-sh)
-⭐ Star this repository if you find it helpful!
+Maintained by: uldyssian-sh⭐ Star this repository if you find it helpful!Disclaimer: Use of this code is at your own risk. Author bears no responsibility for any damages caused by the code.
